@@ -5,10 +5,12 @@ class QuestionModel {
   String question;
   String correct_answer;
   List incorrect_answers;
+  int Score;
 
   QuestionModel(
       {required this.category,
       required this.correct_answer,
+      required this.Score,
       required this.difficulty,
       required this.incorrect_answers,
       required this.question,
@@ -16,6 +18,7 @@ class QuestionModel {
 
   static List<QuestionModel> questionList = [
     QuestionModel(
+      Score: 15,
       category: "Geography",
       type: "multiple",
       difficulty: "hard",
@@ -24,7 +27,8 @@ class QuestionModel {
       incorrect_answers: ["Moratuwa", "Negombo", "Kandy"],
     ),
     QuestionModel(
-      category: "Geography",
+      Score: 10,
+      category: "Math",
       type: "multiple",
       difficulty: "medium",
       question:
@@ -33,14 +37,16 @@ class QuestionModel {
       incorrect_answers: ["Venice", "Amsterdam", "Berlin"],
     ),
     QuestionModel(
-        category: "Geography",
+        Score: 15,
+        category: "Physics",
         type: "multiple",
         difficulty: "hard",
         question: "Which of these is NOT a province in China?",
         correct_answer: "Yangtze",
         incorrect_answers: ["Fujian", "Sichuan", "Guangdong"]),
     QuestionModel(
-        category: "Geography",
+        Score: 25,
+        category: "Chemistry",
         type: "multiple",
         difficulty: "easy",
         question:
@@ -48,14 +54,16 @@ class QuestionModel {
         correct_answer: "Memphis",
         incorrect_answers: ["Thebes", "Alexandria", "Luxor"]),
     QuestionModel(
-        category: "Geography",
+        Score: 5,
+        category: "Biology",
         type: "multiple",
         difficulty: "medium",
         question: "How many countries does Spain have a land border with?",
         correct_answer: "5",
         incorrect_answers: ["2", "3", "4"]),
     QuestionModel(
-        category: "Geography",
+        Score: 15,
+        category: "Science",
         type: "multiple",
         difficulty: "easy",
         question: "What is the Capital of the United States?",
@@ -66,21 +74,24 @@ class QuestionModel {
           "Houston, TX"
         ]),
     QuestionModel(
-        category: "Geography",
+        Score: 35,
+        category: "Soccer",
         type: "multiple",
         difficulty: "medium",
         question: "What tiny principality lies between Spain and France?",
         correct_answer: "Andorra",
         incorrect_answers: ["Liechtenstein", "Monaco", "San Marino"]),
     QuestionModel(
-        category: "Geography",
+        Score: 15,
+        category: "Lab",
         type: "multiple",
         difficulty: "medium",
         question: "How many timezones does Russia have?",
         correct_answer: "11",
         incorrect_answers: ["6", "24", "16"]),
     QuestionModel(
-        category: "Geography",
+        Score: 10,
+        category: "Astronomy",
         type: "multiple",
         difficulty: "hard",
         question:
@@ -88,11 +99,13 @@ class QuestionModel {
         correct_answer: "Abruzzi Spur",
         incorrect_answers: ["Magic Line", "Cesen Route", "Polish Line"]),
     QuestionModel(
-        category: "Geography",
+        Score: 15,
+        category: "Music",
         type: "multiple",
         difficulty: "hard",
         question: "Into which basin does the Jordan River flow into?",
         correct_answer: "Dead Sea",
         incorrect_answers: ["Aral Sea", "Caspian Sea", "Salton Sea"]),
+    /***/
   ];
 }

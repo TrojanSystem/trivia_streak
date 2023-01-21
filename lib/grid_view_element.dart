@@ -36,7 +36,7 @@ class GridView1 extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) =>QuestionScreen()),);
+                            builder: (ctx) =>QuestionScreen(category:category[index].title)),);
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -70,7 +70,7 @@ class GridView1 extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              category.length.toString(),
+                             '${ category.length} questions',
                             ),
                           ],
                         ),

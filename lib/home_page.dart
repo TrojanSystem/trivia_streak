@@ -1,4 +1,8 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:trivia_streak/question_model.dart';
+import 'package:trivia_streak/question_screen.dart';
 
 import 'category_section.dart';
 import 'header_screen.dart';
@@ -38,7 +42,7 @@ class MyHomePage extends StatelessWidget {
                          CategorySection(),
                       ],
                     ),
-                    randomButton()
+                    randomButton(context)
                   ],
                 ),
               ),
@@ -49,7 +53,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Positioned randomButton() {
+  Positioned randomButton(context) {
     return Positioned(
                     bottom: 0,
                     left: 30,
@@ -62,21 +66,28 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 25),
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: _width * 0.8,
-                        height: _height * 0.1,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(105, 89, 223, 1),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Play now(Random Category)',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontSize: 20),
+                      child: GestureDetector(
+                        onTap: () {
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) =>QuestionScreen(category:QuestionModel.questionList[0].category)),);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: _width * 0.8,
+                          height: _height * 0.1,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(105, 89, 223, 1),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Play now(Random Category)',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                       ),
