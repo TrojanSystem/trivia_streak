@@ -15,11 +15,14 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  bool isCorrect = false;
+
   @override
   Widget build(BuildContext context) {
     final question = QuestionModel.questionList;
-    final categoryFilter =
-        question.where((element) => element.category == widget.category).toList();
+    final categoryFilter = question
+        .where((element) => element.category == widget.category)
+        .toList();
     final data = Provider.of<DataHub>(context);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(105, 89, 223, 1),
@@ -62,7 +65,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(18.0, 18, 8, 8),
                       child: Text(
-                        'Question ${data.counts+1}',
+                        'Question ${data.counts + 1}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -79,25 +82,39 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         ),
                       ),
                     ),
-                    Column(
-                      children: categoryFilter[0]
-                          .incorrect_answers
-                          .map(
-                            (e) => GestureDetector(
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: categoryFilter[data.counts]
+                              .incorrect_answers
+                              .length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  Provider.of<DataHub>(context, listen: false)
-                                      .indexChanger(data.counts);
-                                });
+                                  if (categoryFilter[data.counts]
+                                          .correct_answer ==
+                                      categoryFilter[data.counts]
+                                          .incorrect_answers[index]) {
+                                    isCorrect = true;
 
+                                    Provider.of<DataHub>(context, listen: false)
+                                        .indexChanger(data.counts);
+                                  } else {
+                                    Provider.of<DataHub>(context, listen: false)
+                                        .indexChanger(data.counts);
+                                    isCorrect = false;
+                                  }
+                                });
                               },
                               child: QuestionOption(
-                                answer: e,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    )
+                                  answer: categoryFilter[data.counts]
+                                      .incorrect_answers[index],
+                                  index: categoryFilter[data.counts]
+                                      .correct_answer,
+                                  isCorrect: isCorrect),
+                            );
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -110,9 +127,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
 }
 
 class QuestionOption extends StatelessWidget {
-  QuestionOption({required this.answer});
+  QuestionOption(
+      {required this.answer, required this.isCorrect, required this.index});
 
   String answer;
+  bool isCorrect;
+  String index;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +144,7 @@ class QuestionOption extends StatelessWidget {
       height: 90,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.white, width: 4),
-          color: Colors.blue,
+          color: isCorrect && index == answer ? Colors.green : Colors.blue,
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
@@ -135,7 +155,7 @@ class QuestionOption extends StatelessWidget {
           ]),
       child: Text(
         answer,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         textAlign: TextAlign.justify,
       ),
     );
