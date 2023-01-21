@@ -88,7 +88,7 @@ class HomeScreenLeaderBoard extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
           const Positioned(

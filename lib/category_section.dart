@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:trivia_streak/category_model.dart';
+
+import 'grid_view_element.dart';
+
 class CategorySection extends StatelessWidget {
-  const CategorySection({
+  CategorySection({
     Key? key,
   }) : super(key: key);
+  final category = CategoryModel.category;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +18,7 @@ class CategorySection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text(
                   'Categories',
@@ -27,8 +31,7 @@ class CategorySection extends StatelessWidget {
                 Text(
                   'see all',
                   style: TextStyle(
-                    color: const Color.fromRGBO(
-                        105, 89, 223, 1),
+                    color: Color.fromRGBO(105, 89, 223, 1),
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                   ),
@@ -37,21 +40,9 @@ class CategorySection extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemCount: 10,
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+            child: GridView1(category:category),
             ),
-          )
+
         ],
       ),
     );
